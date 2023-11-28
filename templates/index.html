@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Calculadora</title>
+</head>
+<body>
+    <div class="contenedor1">
+        <div class="contenedor">
+            <h1>Calculadora</h1>
+            <form action="{{ url_for('index') }}" method="post">
+
+                <select name="opcion">
+                    <option value="sumar">Sumar</option>
+                    <option value="restar">Restar</option>
+                    <option value="multiplicar">Multiplicar</option>
+                    <option value="dividir">Dividir</option>
+                </select>
+                
+                <input type="text" name="num1" required>
+                <input type="text" name="num2" required>
+                <button type="submit">=</button>
+            </form>
+
+            {% if resultado %}
+                <p>{{resultado}}</p>
+            {% endif %}
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+                <p style="color: red;">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</body>
+</html> 
